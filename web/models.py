@@ -76,3 +76,8 @@ class User(models.Model):
         db_table = "user"
 
 
+
+
+
+
+
