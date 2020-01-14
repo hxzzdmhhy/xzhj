@@ -17,30 +17,33 @@
 <body>
 <div id="wrapper">
     <div class="top-bar"><span class="first"><a href="/">种子搜索</a></span>
-        {#<span><a href="{% tag %}">标签</a></span>#}
-        {#<span><a href="{% weekhot %}">排行</a></span>#}
+{#        <span><a href="{% url 'tag' %}">标签</a></span>#}
+{#        <span><a href="{% url 'weekhot' %}">排行</a></span>#}
     </div>
     <div id="first-content">
         <div id="center-box-wrapper">
             <div id="center-box">
                 <div id="center-logo">
                     <a href="/"><img src="../static/logo.png" alt="{{ sitename }}"/></a>
-                    <p>
-                    <h1>{{ sitename }}-最快的磁力链接搜索引擎</h1></p>
+                    <p><h1>{{ sitename }}-最快的磁力链接搜索引擎</h1></p>
                 </div>
                 <div id="search-box">
-                    {#<form id="search-form" action="{{url_for('search')}}" method="POST">#}
-                    {#{{form.hidden_tag()}}#}
-                    {#{{form.search(id="search")}}#}
-                    {#{{form.submit(class="blue",id="btnSearch")}}#}
-                    {#</form>#}
+{#                    <form id="search-form" action="{% url  %}" method="POST">#}
+                    <form id="search-form" action="/search/" method="POST">
+{#                    {form.hidden_tag()}#}
+{#                    {form.search(id="search")}#}
+{#                    {form.submit(class="blue",id="btnSearch")}#}
+                        {% csrf_token %}
+                        <input type="text" id="search" class="blue">
+                        <input type="submit" id="btnSearch" class ='blue'>
+                    </form>
                     <div class="info-box">
                         <ul>
                             {% for k in keywords %}
-                                {#<li><a href="{{url_for('search_results',query=k.keyword,page=1)}}">{{k.keyword}}</a></li>#}
+                                <li><a href="/search_results/">{{k.keyword}}</a></li>
                             {% endfor %}
                         </ul>
-                        {#<p style="color:#000000; margin-top:10px;">总收录{{total}}条资源, 今日新增{{ today  if today else 0}}条</p>#}
+{#                        <p style="color:#000000; margin-top:10px;">总收录{{total}}条资源, 今日新增{{ today if today else 0}}条</p>#}
                     </div>
                 </div>
             </div>

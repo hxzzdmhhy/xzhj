@@ -17,7 +17,6 @@ sitename="锡纸花甲"
 
 def index(request):
 
-
     return render(request, 'index.html')
 
 

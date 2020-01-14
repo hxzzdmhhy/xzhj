@@ -16,21 +16,24 @@
 <div id="wrapper">
     <div class="top-bar">
         <span class="first"><a href="/">种子搜索</a></span>
-        {#<span><a href="{% url 'tag' %}">标签</a></span>#}
-        {#<span><a href="{% url 'weekhot' %}">排行</a></span>#}
+        <span><a href="/tag/">标签</a></span>
+        <span><a href="/weekhot/">排行</a></span>
     </div>
     <div class="header-div">
-        {#<form class="search-form"  action="{% url 'search' %}" method="POST">#}
-        {#<a href="/" ><img src="{% url 'static' %} " class="nav-logo"/></a>#}
+        <form class="search-form" action="/search/" method="POST">
+        <a href="/" ><img src="/static/" class="nav-logo"/></a>
         {#{{form.hidden_tag()}}#}
         {#{% form.search( id="search") %}#}
         {#{{form.submit(class="blue",id="btnSearch")}}#}
-{#        </form>#}
+        {% csrf_token %}
+        <input type="text" id="search" class="blue">
+        <input type="submit" id="btnSearch" class ='blue'>
+     </form>
     </div>
 
     <div id="sort-bar">
-        {#<a href="{% url 'weekhot' %}">周排行</a>#}
-        {#<a href="{% url 'new' %}">最新收录</a>#}
+        <a href="/weekhot/">周排行</a>
+        <a href="/new/">最新收录</a>
     </div>
 
     <div id="content">
@@ -44,9 +47,8 @@
                     {% for hash in weekhot %}
                         <li>
                             <div class="item-title">
-                                <a href="{% url 'detail' %}" target="_blank">{hash.name}</a>
-                                <span class="cpill blue-pill">{{ hash.requests }}<span>
-                                </span></span>
+                                <a href="/detail/" target="_blank">{hash.name}</a>
+                                <span class="cpill blue-pill">{{ hash.requests }}<span></span></span>
                             </div>
                         </li>
                     {% endfor %}
@@ -54,8 +56,8 @@
             </div>
         </div>
 
-        <div class="push">
-        </div>
+        <div class="push"></div>
+    </div>
     </div>
 
 {% include 'footer.html' %}

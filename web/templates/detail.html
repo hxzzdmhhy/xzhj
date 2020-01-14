@@ -15,21 +15,24 @@
 <body>
 <div id="wrapper">
     <div class="top-bar"><span class="first"><a href="/">种子搜索</a></span>
-        <span><a href="{% url 'tag' %}">标签</a></span>
-        <span><a href="{% url 'weekhot' %}">排行</a></span>
+        <span><a href="/tag/">标签</a></span>
+        <span><a href="/weekhot/">排行</a></span>
     </div>
     <div class="header-div">
-        <form class="search-form" action="{% url 'search' %}" method="POST">
-            <a href="/"><img src="../static/logo_s.png" class="nav-logo"/></a>
-            {{ form.hidden_tag()}}
-            {{ form.search(id="search")}}
-            {{ form.submit(class="blue",id="btnSearch")}}
+        <form class="search-form" action="/search/" method="POST">
+            <a href="/"><img src="{% static 'logo_s.png' %}" class="nav-logo"/></a>
+{#            {{ form.hidden_tag()}}#}
+{#            {{ form.search(id="search")}}#}
+{#            {{ form.submit(class="blue",id="btnSearch")}}#}
+            {% csrf_token %}
+                        <input type="text" id="search" class="blue">
+                        <input type="submit" id="btnSearch" class ='blue'>
         </form>
     </div>
 
     <div id="content">
         <div id="wall">
-            <h2>{{ hash['name'].encode('utf8')}}</h2>
+            <h2>{{ hash|default:'name'}}</h2>
             <div class="detail-panel detail-width">
                 <table class="detail-table detail-width">
                     <tbody>
@@ -41,17 +44,18 @@
                         <th>文件数量</th>
                     </tr>
                     <tr>
-                        <td>{{ hash['category']}}</td>
-                        <td>{{ hash['create_time']|todate}}</td>
-                        <td>{{ hash['requests']}}</td>
+                        <td>{{ hash|default:'category'}}</td>
+                        <td>{{ hash|default:'create_time'|default:'todate' }}</td>
+                        <td>{{ hash|default:'requests'}}</td>
                         <td>
-                            {% if hash['length']>1073741824 %}
-                                {{(hash['length']/1073741824)|round(2)}}G
-                                {% else %}{{(hash['length']/1048576)|round(2)}}M
+                            {% if hash|length > 1073741824 %}
+                                {{  hash|length/1073741824)|round(2) }}G
+                            {% else %}
+                                {{ hash|length/1048576 |round(2)}}M
                             {% endif %}
                         </td>
                         <td>
-                            {{(hash.info_hash|filelist)|count}}
+                            {% hash.info_hash|filelist|count %}
                         </td>
                     </tr>
                     </tbody>
@@ -64,7 +68,7 @@
                     <div class="panel-body">
                         <div id="magnet">
                             <img src="../static/magnet.png"><a href="magnet:?xt=urn:btih:
-                                {{ hash['info_hash'] | upper}}">magnet:?xt=urn:btih:{{ hash['info_hash'] | upper}}</a>
+                                {{ hash|default:'info_hash'| upper}}">magnet:?xt=urn:btih:{{ hash['info_hash'] | upper}}</a>
                         </div>
                     </div>
                 </div>
@@ -86,7 +90,7 @@
                     <div class="panel-header">种子标签</div>
                     <div class="panel-body">
                         {% for fenci in fenci_list %}
-                            <a href="{{ url_for('search_results',query=fenci,page=1)}}">{{ fenci.encode('utf8')}}</a>
+                            <a href="{% url 'search_results' %}">{{ fenci.encode('utf8')}}</a>
                             &nbsp;&nbsp;
                         {% endfor %}
                     </div>
