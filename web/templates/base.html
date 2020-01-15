@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    {% load static %}
+    <meta charset="utf-8"/>
+    <title>{{ query }} - 搜索结果 - {{ sitename }} 磁力链接,磁力搜索</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="电影种子,磁力链接,迅雷链接,BT下载,尽在{{ sitename }}"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'default.css'%}"/>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico'%}"/>
 </head>
 <body>
+<div id="wrapper">
+    <div class="top-bar"><span class="first"><a href="/">种子搜索</a></span>
+        <span><a href="/tag/">标签</a></span>
+        <span><a href="/weekhot/">排行</a></span>
+    </div>
+    <div class="header-div">
+        <form class="search-form" action="/search/" method="POST">
+            <a href="/"><img src="{% static 'logo_s.png' %}" class="nav-logo"/></a>
+{#            {{ form.hidden_tag }}#}
+{#            {{ form.search(id="search")}}#}
+{#            {{ form.submit(class="blue",id="btnSearch")}}#}
+            {% csrf_token %}
+            <input type="text" id="search" class="blue">
+            <input type="submit" id="btnSearch" class ='blue'>
+        </form>
 
-</body>
-</html>
+    </div>
+
+
+
+    </div>

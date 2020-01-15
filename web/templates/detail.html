@@ -3,9 +3,9 @@
 <head>
     {% load static %}
     <meta charset="utf-8"/>
-    <title>{{ hash['name'].encode('utf8')}} - {{ sitename }} 磁力链接,磁力搜索</title>
+    <title>{{ hash.name }} - {{ sitename }} 磁力链接,磁力搜索</title>
     <meta name="keywords"
-          content="{% for fenci in fenci_list %}{{ fenci.encode('utf8')}},{% endfor %}HOTDHT,磁力链接,磁力搜索"/>
+          content="{% for fenci in fenci_list %}{{ fenci }},{% endfor %}HOTDHT,磁力链接,磁力搜索"/>
     <meta name="description" content="电影种子,磁力链接,迅雷链接,BT下载,尽在{{ sitename }}"/>
     <meta name="viewport" content="width=device-width"/>
 
@@ -48,14 +48,14 @@
                         <td>{{ hash|default:'create_time'|default:'todate' }}</td>
                         <td>{{ hash|default:'requests'}}</td>
                         <td>
-                            {% if hash|length > 1073741824 %}
-                                {{  hash|length/1073741824)|round(2) }}G
-                            {% else %}
-                                {{ hash|length/1048576 |round(2)}}M
-                            {% endif %}
+{#                            {% if hash|length > 1073741824 %}#}
+{#                                {{  hash|length/1073741824)|round(2) }}G#}
+{#                            {% else %}#}
+{#                                {{ hash|length/1048576 |round(2)}}M#}
+{#                            {% endif %}#}
                         </td>
                         <td>
-                            {% hash.info_hash|filelist|count %}
+{#                            {% hash.info_hash|filelist|count %}#}
                         </td>
                     </tr>
                     </tbody>
@@ -68,7 +68,7 @@
                     <div class="panel-body">
                         <div id="magnet">
                             <img src="../static/magnet.png"><a href="magnet:?xt=urn:btih:
-                                {{ hash|default:'info_hash'| upper}}">magnet:?xt=urn:btih:{{ hash['info_hash'] | upper}}</a>
+{#                                {{ hash|default:'info_hash'| upper}}">magnet:?xt=urn:btih:{{ hash['info_hash'] | upper}}</a>#}
                         </div>
                     </div>
                 </div>
@@ -79,9 +79,9 @@
                     </div>
                     <div class="panel-body">
                         <div id="xlurl">
-                            {% set magneturl=("magnet:?xt=urn:btih:"~hash['info_hash'] | upper) %}
+{#                            {% set magneturl=("magnet:?xt=urn:btih:"~hash['info_hash'] | upper) %}#}
                             <img src="../static/xunlei.png"><a
-                                href="thunder://{{ magneturl|tothunder }}">thunder://{{ magneturl|tothunder }}</a>
+{#                                href="thunder://{{ magneturl|tothunder }}">thunder://{{ magneturl|tothunder }}</a>#}
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                     <div class="panel-header">种子标签</div>
                     <div class="panel-body">
                         {% for fenci in fenci_list %}
-                            <a href="{% url 'search_results' %}">{{ fenci.encode('utf8')}}</a>
+{#                            <a href="{% url 'search_results' %}">{{ fenci.encode('utf8')}}</a>#}
                             &nbsp;&nbsp;
                         {% endfor %}
                     </div>
@@ -102,10 +102,10 @@
                     </div>
                     <div class="panel-body">
                         <ol>
-                            {% for f in (hash.info_hash|filelist) %}
-                                <li>{{ f['path']}}&nbsp;<span
-                                        class="cpill blue-pill">{{ f['length']|filesizeformat}}</span></li>
-                            {% endfor %}
+{#                            {% for f in (hash.info_hash|filelist) %}#}
+{#                                <li>{{ f['path']}}&nbsp;<span#}
+{#                                        class="cpill blue-pill">{{ f['length']|filesizeformat}}</span></li>#}
+{#                            {% endfor %}#}
                         </ol>
                     </div>
                 </div>

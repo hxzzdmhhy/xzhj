@@ -34,16 +34,17 @@
 {#                    {form.search(id="search")}#}
 {#                    {form.submit(class="blue",id="btnSearch")}#}
                         {% csrf_token %}
-                        <input type="text" id="search" class="blue">
+                        <input type="text" id="search" class="blue" name="name">
                         <input type="submit" id="btnSearch" class ='blue'>
                     </form>
                     <div class="info-box">
                         <ul>
                             {% for k in keywords %}
-                                <li><a href="/search_results/">{{k.keyword}}</a></li>
+                                <li><a href="/search_results/">{{k}}</a></li>
                             {% endfor %}
                         </ul>
 {#                        <p style="color:#000000; margin-top:10px;">总收录{{total}}条资源, 今日新增{{ today if today else 0}}条</p>#}
+                        <p style="color:#000000; margin-top:10px;">总收录{{total}}条资源, 今日新增条</p>
                     </div>
                 </div>
             </div>

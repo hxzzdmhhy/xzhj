@@ -12,5 +12,7 @@ urlpatterns = [
     path('search_results/', views.search_results, name='search_results'),
     path('search_results_bycreate_time/', views.search_results_bycreate_time, name='search_results_bycreate_time'),
     path('search_results_byrequests/', views.search_results_byrequests, name='search_results_byrequests'),
+    path('detail/', views.detail, name='detail'),
+    path('new/', views.new, name='new'),
 
     ]
